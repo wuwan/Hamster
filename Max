@@ -1,3 +1,4 @@
+//求数组中的最大值，要求可以处理各种情况，包括输入不合格，为空之类
 import java.util.Scanner;
 import java.util.InputMismatchException;
 public class Test {
