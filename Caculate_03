@@ -1,0 +1,902 @@
+//完整版四则运算题
+import java.util.Scanner;
+import java.util.ArrayList;
+public class random_03{
+	public static void main(String[] args){
+		int N,i,N1,N2;
+		int sum=0;
+		String str;
+		String hh;	
+		Scanner in=new Scanner(System.in);	
+		change fra=new change();
+		System.out.println("请输入需要打印的运算题的数目:");
+		N=in.nextInt();
+		System.out.println("请选择是否需要分数运算（Y/N）:");
+		hh=in.next();
+		if(hh.equals("Y"))//分数运算
+		{
+			for(i=0;i<N;i++)
+			{			
+				int a,b,c,d;
+				int s1,s2;
+				a=(int) (Math.random()*100);
+			    b=(int) (Math.random()*99+1);
+			    //分母不等于0
+	            c=(int) (Math.random()*100);
+	            d=(int) (Math.random()*99+1);
+	            int h=(int)(Math.random()*4);
+		    	int aa=0,bb=0,cc=0,dd=0;
+		    	//为了产生分数，分子也不可为零
+		    	if(a==0)
+		    		a=(int) (Math.random()*99+1);
+		    	if(c==0)
+		    		c=(int) (Math.random()*99+1);
+		    	//化简分数
+		    	int j;
+		    	j=fra.change_(a,b);
+		    	aa=a/j;
+		    	bb=b/j;
+		    	//化简分数
+		    	int p;
+		    	p=fra.change_(c,d);
+		    	cc=c/p;
+		    	dd=d/p;
+		    	int j1;
+		    	int s11,s22;
+		    	String str1;
+		        if(h==0)
+		        {   
+		        	//化简后，分母等于1时，直接输出分子
+		        	if(bb!=1&&dd!=1)
+			            System.out.println(aa+"/"+bb+" + "+cc+"/"+dd+"=");
+			            
+		        	else if(bb==1&&dd!=1)
+		        		System.out.println(aa+" + "+cc+"/"+dd+"=");
+		        	
+		        	else if(bb!=1&&dd==1)
+		        		System.out.println(aa+"/"+bb+" + "+cc+"=");
+		        		
+		        	else
+		        		System.out.println(aa+"+"+cc+"=");
+		        	//分数加法计算
+		        	  s1=aa*dd+bb*cc;
+			          s2=bb*dd;
+			          j1=fra.change_(s1,s2);
+			          s11=s1/j1;
+			          s22=s2/j1;
+			          str1=s11+"/"+s22;
+			          str=in.next();
+			          if(fra.judge_FRA(str1,str)==1)
+			          {
+			             sum++;
+			          }
+			          System.out.println("正确"+sum+"道题.");    		
+		        }
+		        else if(h==1)
+		        {
+		        	//不能产生负数
+		        	int t1,t2;
+		        	if((a/b-c/d)<0)
+		        	{
+		        		t1=aa;
+		        		aa=cc;
+		        		cc=t1;
+		        		t2=bb;
+		        		bb=dd;
+		        		dd=t2;
+		        	}
+		        	
+		        	//化简后，分母等于1时，直接输出分子	
+		        	if(bb!=1&&dd!=1)
+			            System.out.println(aa+"/"+bb+" - "+cc+"/"+dd+"=");			            
+		        	else if(bb==1&&dd!=1)
+		        		System.out.println(aa+" - "+cc+"/"+dd+"=");
+		        	else if(bb!=1&&dd==1)
+		        		System.out.println(aa+"/"+bb+" - "+cc+"=");
+		        	else
+		        		System.out.println(aa+"-"+cc+"=");
+		        	//分数减法计算
+		        	s1=aa*dd-bb*cc;
+	        		s2=bb*dd;
+	        		j1=fra.change_(s1,s2);
+	        		s11=s1/j1;
+		            s22=s2/j1;
+		            str1=s11+"/"+s22;
+		            str=in.next();
+		            if(fra.judge_FRA(str1,str)==1)
+		            {
+		            	sum++;
+		            }
+		            System.out.println("正确"+sum+"道题.");
+		        }
+		        else if(h==2)
+		        {
+		        	
+		        	//化简后，分母等于1时，直接输出分子
+		        	if(bb!=1&&dd!=1)
+			            System.out.println(aa+"/"+bb+" * "+cc+"/"+dd+"=");
+
+		        	else if(bb==1&&dd!=1)
+		        		System.out.println(aa+" * "+cc+"/"+dd+"=");
+		     
+		        	else if(bb!=1&&dd==1)
+		        		System.out.println(aa+"/"+bb+" * "+cc+"=");
+		        		
+		        	else
+		        		System.out.println(aa+"*"+cc+"=");
+		        	//分数乘法计算
+		        	s1=aa*cc;
+	        		s2=bb*dd;
+	        		j1=fra.change_(s1,s2);
+	        		s11=s1/j1;
+		            s22=s2/j1;
+		            str1=s11+"/"+s22;
+		            str=in.next();
+		            if(fra.judge_FRA(str1,str)==1)
+		            {
+		            	sum++;
+		            }
+		            System.out.println("正确"+sum+"道题.");
+		        }
+		        else
+		        { 
+		        	//化简后，分母等于1时，直接输出分子
+		        	if(bb!=1&&dd!=1)
+			            System.out.println("("+aa+"/"+bb+")"+" / "+"("+cc+"/"+dd+")"+"=");
+			         
+		        	else if(bb==1&&dd!=1)
+		        		System.out.println(aa+" / "+"("+cc+"/"+dd+")"+"=");
+		        		
+		        	else if(bb!=1&&dd==1)
+		        		System.out.println("("+aa+"/"+bb+")"+" / "+cc+"=");
+		        		
+		        	else
+		        		System.out.println(aa+"/"+cc+"=");
+		        	//分数除法计算
+		        	s1=aa*dd;
+	        		s2=bb*cc;
+	        		j1=fra.change_(s1,s2);
+	        		s11=s1/j1;
+		            s22=s2/j1;
+		            str1=s11+"/"+s22;
+		            str=in.next();
+		            if(fra.judge_FRA(str1,str)==1)
+		            {
+		            	sum++;
+		            }
+		            System.out.println("正确"+sum+"道题.");
+		        }
+			}
+		}
+		else if(hh.equals("N"))//整数运算
+		{
+			System.out.println("请选择是否需要产生括号的运算题（Y/N）:");
+			String str1,str2;
+			double strr2;
+			str=in.next();
+			double strr1=0;
+			double ss;
+			if(str.equals("Y"))
+			{
+				System.out.println("请输入数值范围:");
+				N1=in.nextInt();
+				for(i=0;i<N;i++)
+				{
+					ArrayList<Integer> al1=new ArrayList<Integer>();
+					//申请动态数组存放操作数
+					ArrayList<Integer> al2=new ArrayList<Integer>();
+					//申请动态数组存放运算符
+					int m,n,a,b;
+					int j,k;
+					int h1;
+					h1=(int) (Math.random()*5+1);
+					int h2=0;
+					m=(int) (Math.random()*2+3);
+					//限制操作数个数
+					n=m-1;
+					//运算符个数
+					for(j=0;j<m;j++)
+					{
+						a=(int) (Math.random()*(N1-1)+1);
+						al1.add(a);
+					}//将操作数压入al1数组
+					
+					for(k=0;k<n;k++)
+					{
+						b=(int) (Math.random()*4);
+						al2.add(b);
+					}//将运算符压入al2数组
+					if(m==3)//产生的操作数是3个
+					{
+						if((int)al2.get(0)>(int)al2.get(1))//比较优先级
+						{
+							if((int)al2.get(0)==1)
+							{
+							    System.out.print((int)al1.get(0)+"-"+(int)al1.get(1)+"+"+(int)al1.get(2));
+							    strr1=(int)al1.get(0)-(int)al1.get(1)+(int)al1.get(2);
+							}						    
+							else if((int)al2.get(0)==2)
+							{
+								if((int)al2.get(1)==0)
+								{
+								    System.out.print((int)al1.get(0)+"*"+"("+(int)al1.get(1)+"+"+(int)al1.get(2)+")");
+								    strr1=(int)al1.get(0)*((int)al1.get(1)+(int)al1.get(2));
+								}
+								else if((int)al2.get(1)==1)
+								{
+									System.out.print((int)al1.get(0)+"*"+"("+(int)al1.get(1)+"-"+(int)al1.get(2)+")");
+									strr1=(int)al1.get(0)*((int)al1.get(1)-(int)al1.get(2));
+								}
+						    }
+							else if((int)al2.get(0)==3)
+							{
+								if((int)al2.get(1)==0)
+								{
+									h2=h1*((int)al1.get(1)+(int)al1.get(2));
+								    System.out.print(h2+"/"+"("+(int)al1.get(1)+"+"+(int)al1.get(2)+")");
+								    strr1=h1;
+								}
+								else if((int)al2.get(1)==1)
+								{
+									if((int)al1.get(1)>(int)al1.get(2))
+									{
+										h2=h1*((int)al1.get(1)-(int)al1.get(2));
+										System.out.print((h2+"/"+"("+(int)al1.get(1)+"-"+(int)al1.get(2)+")"));
+										strr1=h1;
+									}
+									else
+									{
+										h2=h1*((int)al1.get(2)-(int)al1.get(1));
+										System.out.print((h2+"/"+"("+(int)al1.get(1)+"-"+(int)al1.get(2)+")"));
+										strr1=h1;
+									}
+								}
+								if((int)al2.get(1)==2)
+								{
+									h2=h1*(int)al1.get(1);
+									System.out.print((h2+"/"+(int)al1.get(1)+"*"+(int)al1.get(2)));
+									strr1=h1*(int)al1.get(2);
+								}
+						    }
+						}
+						else if((int)al2.get(0)<(int)al2.get(1)||(int)al2.get(0)==(int)al2.get(1))//比较优先级
+						{
+							if((int)al2.get(0)==0)
+							{
+								if((int)al2.get(1)==0)
+								{
+									System.out.print((int)al1.get(0)+"+"+(int)al1.get(1)+"+"+(int)al1.get(2));
+									strr1=(int)al1.get(0)+(int)al1.get(1)+(int)al1.get(2);
+								}
+								else if((int)al2.get(1)==1)
+								{
+									System.out.print((int)al1.get(0)+"+"+(int)al1.get(1)+"-"+(int)al1.get(2));
+									strr1=(int)al1.get(0)+(int)al1.get(1)-(int)al1.get(2);
+								}
+								else if((int)al2.get(1)==2)
+								{
+									System.out.print((int)al1.get(0)+"+"+(int)al1.get(1)+"*"+(int)al1.get(2));
+									strr1=(int)al1.get(0)+(int)al1.get(1)*(int)al1.get(2);
+								}
+								else if((int)al2.get(1)==3)
+								{
+									if((int)al1.get(1)>=(int)al1.get(2))
+									{
+										h2=h1*(int)al1.get(2);
+										System.out.print((int)al1.get(0)+"+"+h2+"/"+(int)al1.get(2));
+										strr1=(int)al1.get(0)+h1;
+									}
+									else
+									{
+										h2=h1*(int)al1.get(1);
+										System.out.print((int)al1.get(0)+"+"+h2+"/"+(int)al1.get(1));
+										strr1=(int)al1.get(0)+h1;
+									}
+								}
+							}
+							else if((int)al2.get(0)==1)
+							{
+								if((int)al2.get(1)==1)
+								{
+									System.out.print((int)al1.get(0)+"-"+(int)al1.get(1)+"-"+(int)al1.get(2));
+									strr1=(int)al1.get(0)-(int)al1.get(1)-(int)al1.get(2);
+								}
+								else if((int)al2.get(1)==2)
+								{
+									System.out.print((int)al1.get(0)+"-"+(int)al1.get(1)+"*"+(int)al1.get(2));
+									strr1=(int)al1.get(0)-(int)al1.get(1)*(int)al1.get(2);
+								}
+								else if((int)al2.get(1)==3)
+								{
+									if((int)al1.get(1)>=(int)al1.get(2))
+									{
+										h2=h1*(int)al1.get(2);
+										System.out.print((int)al1.get(0)+"-"+h2+"/"+(int)al1.get(2));
+										strr1=(int)al1.get(0)-h1;
+									}
+									else
+									{
+										h2=h1*(int)al1.get(1);
+										System.out.print((int)al1.get(0)+"-"+h2+"/"+(int)al1.get(1));
+										strr1=(int)al1.get(0)-h1;
+									}
+								}
+						    }
+							else if((int)al2.get(0)==2)
+							{
+								if((int)al2.get(1)==2)
+								{
+									System.out.print((int)al1.get(0)+"*"+(int)al1.get(1)+"*"+(int)al1.get(2));
+									strr1=(int)al1.get(0)*(int)al1.get(1)*(int)al1.get(2);
+								}
+								else if((int)al2.get(1)==3)
+								{
+									h2=h1*(int)al1.get(2);
+									System.out.print((int)al1.get(0)+"*"+h2+"/"+(int)al1.get(2));
+									strr1=(int)al1.get(0)*h2/(int)al1.get(2);
+								}
+						    }
+							else if((int)al2.get(0)==3)
+							{
+								if((int)al1.get(1)>=(int)al1.get(2))
+								{
+									h2=h1*(int)al1.get(2);
+									int h22=0;
+									h22=h1*(h2/(int)al1.get(2));
+								    System.out.print(h22+"/"+"("+(h2+"/"+(int)al1.get(2)+")"));
+								    strr1=h1;
+								}
+								else
+								{
+									h2=h1*(int)al1.get(1);
+									int h22=0;
+									h22=h1*(h2/(int)al1.get(1));
+									System.out.print(h22+"/"+"("+h2+"/"+(int)al1.get(1)+")");
+									strr1=h1;
+								}
+							}
+						}
+						System.out.print("=");
+						ss=in.nextDouble();
+						if(fra.judge(strr1,ss)==1)
+						{
+							sum++;
+						}
+						System.out.println("正确"+sum+"道题.");
+					}
+					else if(m==4)//产生的操作数等于4个
+					{
+						double sumss=0;
+						int r=0;
+						double list[]=new double[2];//存放和
+						for(r=0;r<2;r++)
+						{
+							list[r]=0;
+						}
+						System.out.print("(");
+						if((int)al2.get(0)>(int)al2.get(1))//比较运算符优先级
+						{
+							if((int)al2.get(0)==1)//第一个出现减法
+							{
+								if(((int)al1.get(0)-(int)al1.get(1))>=0)
+								{
+							        System.out.print((int)al1.get(0)+"-"+(int)al1.get(1)+"+"+(int)al1.get(2));
+							        list[0]=(int)al1.get(0)-(int)al1.get(1)+(int)al1.get(2);
+								}
+								else
+								{
+									System.out.print((int)al1.get(1)+"-"+(int)al1.get(0)+"+"+(int)al1.get(2));
+							        list[0]=(int)al1.get(1)-(int)al1.get(0)+(int)al1.get(2);
+								}
+							}
+							else if((int)al2.get(0)==2)//第一个出现乘法
+							{
+								if((int)al2.get(1)==0)
+								{
+								    System.out.print((int)al1.get(0)+"*"+"("+(int)al1.get(1)+"+"+(int)al1.get(2)+")");
+								    list[0]=(int)al1.get(0)*+((int)al1.get(1)+(int)al1.get(2));
+								}
+								else if((int)al2.get(1)==1)
+								{
+									if(((int)al1.get(1)-(int)al1.get(2))>=0)
+									{
+									   System.out.print((int)al1.get(0)+"*"+"("+(int)al1.get(1)+"-"+(int)al1.get(2)+")");
+									   list[0]=(int)al1.get(0)*((int)al1.get(1)-(int)al1.get(2));
+									}
+									else
+									{
+										System.out.print((int)al1.get(0)+"*"+"("+(int)al1.get(2)+"-"+(int)al1.get(1)+")");
+										list[0]=(int)al1.get(0)*((int)al1.get(2)-(int)al1.get(1));
+									}
+								}
+						    }
+							else if((int)al2.get(0)==3)//第一个出现除法
+							{
+								if((int)al2.get(1)==0)
+								{
+									h2=h1*((int)al1.get(1)+(int)al1.get(2));
+								    System.out.print(h2+"/"+"("+(int)al1.get(1)+"+"+(int)al1.get(2)+")");
+								    list[0]=h1;
+								}
+								else if((int)al2.get(1)==1)
+								{
+									if((int)al1.get(1)==(int)al1.get(2))
+									{
+										h2=h1*(((int)al1.get(1)+1)-(int)al1.get(2));
+										System.out.print(h2+"/"+"("+((int)al1.get(1)+1)+"-"+(int)al1.get(2)+")");
+										list[0]=h1;
+									}
+									else 
+									{
+										if(((int)al1.get(1)-(int)al1.get(2))>0)
+										{
+											h2=h1*((int)al1.get(1)-(int)al1.get(2));
+										    System.out.print(h2+"/"+"("+(int)al1.get(1)+"-"+(int)al1.get(2)+")");
+										    list[0]=h1;
+										}
+										else
+										{
+											h2=h1*((int)al1.get(2)-(int)al1.get(1));
+											System.out.print(h2+"/"+"("+(int)al1.get(2)+"-"+(int)al1.get(1)+")");
+										    list[0]=h1;
+										}
+									}
+								}
+								if((int)al2.get(1)==2)
+								{
+									h2=h1*(int)al1.get(1);
+									System.out.print(h2+"/"+(int)al1.get(1)+"*"+(int)al1.get(2));
+									list[0]=h1*(int)al1.get(2);
+								}
+						    }
+					    }
+						else if((int)al2.get(0)<(int)al2.get(1)||(int)al2.get(0)==(int)al2.get(1))
+						{
+							if((int)al2.get(0)==0)
+							{
+								if((int)al2.get(1)==0)//第一个出现加法
+								{
+									System.out.print((int)al1.get(0)+"+"+(int)al1.get(1)+"+"+(int)al1.get(2));
+									list[0]=(int)al1.get(0)+(int)al1.get(1)+(int)al1.get(2);
+								}
+								else if((int)al2.get(1)==1)
+								{
+									if((int)al1.get(1)-(int)al1.get(2)>=0)
+									{
+									    System.out.print((int)al1.get(0)+"+"+(int)al1.get(1)+"-"+(int)al1.get(2));
+									    list[0]=(int)al1.get(0)+(int)al1.get(1)-(int)al1.get(2);
+									}
+									else
+									{
+										 System.out.print((int)al1.get(0)+"+"+(int)al1.get(2)+"-"+(int)al1.get(1));
+										 list[0]=(int)al1.get(0)+(int)al1.get(2)-(int)al1.get(1);
+									}
+								}
+								else if((int)al2.get(1)==2)
+								{
+									System.out.print((int)al1.get(0)+"+"+(int)al1.get(1)+"*"+(int)al1.get(2));
+									list[0]=(int)al1.get(0)+(int)al1.get(1)*(int)al1.get(2);
+								}
+								else if((int)al2.get(1)==3)
+								{
+									if((int)al1.get(1)>(int)al1.get(2))
+									{
+										h2=h1*(int)al1.get(2);
+										System.out.print((int)al1.get(0)+"+"+h2+"/"+(int)al1.get(2));
+										list[0]=(int)al1.get(0)+h1;
+									}
+									else
+									{
+										h2=h1*(int)al1.get(1);
+										System.out.print((int)al1.get(0)+"+"+h2+"/"+(int)al1.get(1));
+										list[0]=(int)al1.get(0)+h1;
+									}
+								}
+							}
+							else if((int)al2.get(0)==1)//第一个出现减法
+							{
+								if((int)al2.get(1)==1)
+								{
+									if(((int)al1.get(0)-(int)al1.get(1))>=0)
+									{
+										if(((int)al1.get(0)-(int)al1.get(1)-(int)al1.get(2))>=0)
+										{
+											System.out.print((int)al1.get(0)+"-"+(int)al1.get(1)+"-"+(int)al1.get(2));
+									        list[0]=(int)al1.get(0)-(int)al1.get(1)-(int)al1.get(2);
+										}
+										else
+										{
+											System.out.print((int)al1.get(2)+"-"+(int)al1.get(0)+"+"+(int)al1.get(1));
+									        list[0]=(int)al1.get(2)-(int)al1.get(0)-(int)al1.get(1);
+										}
+									}
+									else
+									{
+										if(((int)al1.get(1)-(int)al1.get(0)-(int)al1.get(2))>=0)
+										{
+											System.out.print((int)al1.get(1)+"-"+(int)al1.get(0)+"-"+(int)al1.get(2));
+									        list[0]=(int)al1.get(1)-(int)al1.get(0)-(int)al1.get(2);
+										}
+										else
+										{
+											System.out.print((int)al1.get(2)+"-"+(int)al1.get(1)+"+"+(int)al1.get(0));
+									        list[0]=(int)al1.get(2)-(int)al1.get(1)-(int)al1.get(0);
+										}
+									}
+								}
+								else if((int)al2.get(1)==2)
+								{
+									if(((int)al1.get(0)-(int)al1.get(1)*(int)al1.get(2))>=0)
+									{
+									    System.out.print((int)al1.get(0)+"-"+(int)al1.get(1)+"*"+(int)al1.get(2));
+									    list[0]=(int)al1.get(0)-(int)al1.get(1)*(int)al1.get(2);
+									}
+									else
+									{
+										System.out.print((int)al1.get(1)+"*"+(int)al1.get(2)+"-"+(int)al1.get(0));
+									    list[0]=(int)al1.get(1)*(int)al1.get(2)-(int)al1.get(0);
+									}
+								}
+								else if((int)al2.get(1)==3)
+								{
+									if((int)al1.get(1)>(int)al1.get(2))
+									{
+										if(((int)al1.get(0)-(int)al1.get(1)/(int)al1.get(2))>=0)
+										{
+											h2=h1*(int)al1.get(2);
+											System.out.print((int)al1.get(0)+"-"+h2+"/"+(int)al1.get(2));
+											list[0]=(int)al1.get(0)-h1;
+										}
+										else
+										{
+											h2=h1*(int)al1.get(2);
+											System.out.print(h2+"/"+(int)al1.get(2)+"-"+(int)al1.get(0));
+											list[0]=h1-(int)al1.get(0);
+										}
+									}
+									else
+									{
+										if(((int)al1.get(0)-(int)al1.get(2)/(int)al1.get(1))>=0)
+										{
+											h2=h1*(int)al1.get(1);
+											System.out.print((int)al1.get(0)+"-"+h2+"/"+(int)al1.get(1));
+											list[0]=(int)al1.get(0)-h1;
+										}
+										else
+										{
+											h2=h1*(int)al1.get(1);
+											System.out.print(h2+"/"+(int)al1.get(1)+"-"+(int)al1.get(0));
+											list[0]=h1-(int)al1.get(0);
+										}
+									}
+								}
+						    }
+							else if((int)al2.get(0)==2)//第一个出现乘法
+							{
+								if((int)al2.get(1)==2)
+								{
+									System.out.print((int)al1.get(0)+"*"+(int)al1.get(1)+"*"+(int)al1.get(2));
+									list[0]=(int)al1.get(0)*(int)al1.get(1)*(int)al1.get(2);
+								}
+								else if((int)al2.get(1)==3)
+								{
+									if((int)al1.get(1)>(int)al1.get(2))
+									{
+										h2=h1*(int)al1.get(2);
+										System.out.print((int)al1.get(0)+"*"+h2+"/"+(int)al1.get(2));
+										list[0]=(int)al1.get(0)*h1;
+									}
+									else
+									{
+										h2=h1*(int)al1.get(1);
+										System.out.print((int)al1.get(0)+"*"+h2+"/"+(int)al1.get(1));
+										list[0]=(int)al1.get(0)*h1;
+									}
+								}
+						    }
+							else if((int)al2.get(0)==3)//第一个出现除法
+							{
+								
+								if((int)al1.get(1)>(int)al1.get(2))
+								{
+									h2=h1*(int)al1.get(2);
+									int hh2=0;
+									hh2=h1*((int)al1.get(1)/(int)al1.get(2));
+									System.out.print(hh2+"/"+"("+h2+"/"+(int)al1.get(2)+")");
+									list[0]=h1;
+								}
+								else
+								{
+									h2=h1*(int)al1.get(1);
+									int hh2=0;
+									hh2=h1*((int)al1.get(2)/(int)al1.get(1));
+									System.out.print(hh2+"/"+"("+h2+"/"+(int)al1.get(1)+")");
+									list[0]=h1;
+								}
+							}
+						}
+						System.out.print(")");
+						list[1]=(int)al1.get(3);
+						if((int)al2.get(2)==0)
+						{
+							System.out.print("+"+(int)al1.get(3));
+							sumss=list[0]+(int)al1.get(3);
+						}
+						else if((int)al2.get(2)==1)
+						{
+							if(list[0]-list[1]>=0)
+							{
+							    System.out.print("-"+(int)al1.get(3));
+							    sumss=list[0]-(int)al1.get(3);
+							}
+							else if(list[0]<list[1])
+							{
+								System.out.print("+"+(int)al1.get(3));
+								sumss=(int)al1.get(3)+list[0];
+							}
+						}
+						else if((int)al2.get(2)==2)
+						{
+							System.out.print("*"+(int)al1.get(3));
+							sumss=list[0]*(int)al1.get(3);
+						}
+						else if((int)al2.get(2)==3)
+						{
+							System.out.print("*"+(int)al1.get(3));
+							sumss=list[0]*(int)al1.get(3);
+						}
+						System.out.print("=");
+						strr1=in.nextDouble();
+						if(fra.judge(sumss,strr1)==1)
+						{
+							sum++;
+						}
+						System.out.println(sumss);
+						System.out.println("正确"+sum+"道题.");
+					}
+	            }
+			}
+			else if(str.equals("N"))//不需要产生括号
+			{
+				System.out.println("请输入数值范围:");
+				N2=in.nextInt();
+				System.out.println("请选择是否有无乘除法的运算题（Y/N）:");
+				str1=in.next();
+				if(str1.equals("Y"))//  有乘除法
+				{				
+					System.out.println("请选择是否有无余数的运算题（Y/N）:");
+					str2=in.next();	
+					
+					if(str2.equals("Y"))//需要有余数
+					{
+						for(i=0;i<N;i++)
+						{
+							int a,b,c,c1,h;
+							a=(int) (Math.random()*N2);
+						    b=(int) (Math.random()*N2);
+							h=(int) (Math.random()*4);
+						    //控制加减运算符
+							c=(int) (Math.random()*(N2-1)+1);
+						    c1=(int) (Math.random()*10+1);
+						    //控制倍数
+						    if(h==0)
+						    {
+								System.out.println(a+"+"+b+"=");
+								double s;
+					    		s=a+b;
+					    		strr2=in.nextDouble();
+					            if(fra.judge(s,strr2)==1)
+					            {
+					            	sum++;
+					            }
+						    	
+						    }
+						    if(h==1)
+						    {
+						    	double s;
+						    	if(a-b>=0)
+						    	{
+						    		System.out.println(a+"-"+b+"=");
+					    		    s=a-b;
+						    	}
+						    	else
+						    	{
+						    		System.out.println(b+"-"+a+"=");
+					    		    s=b-a;
+						    	}
+					    		strr2=in.nextDouble();
+					            if(fra.judge(s,strr2)==1)
+					            {
+					            	sum++;
+					            }
+						    }
+						    if(h==2)
+						    {
+						    	System.out.println(a+"*"+b+"=");
+						    	double s;
+					    		s=a*b;
+					    		strr2=in.nextDouble();
+					            if(fra.judge(s,strr2)==1)
+					            {
+					            	sum++;
+					            }	    	
+						    }
+						    if(h==3)
+						    {
+						    	int d,k,dd,cc;	
+						    	int j1;
+						    	k=(int) (Math.random()*(c-1)+1);
+						    	//必须产生余数
+						    	d=c*c1+k;
+						    	System.out.println(d+"/"+c+"=");
+						    	String s = null;
+						    	String result;
+						    	if(c!=1)
+						    	s=d+"/"+c;
+						    	if(c==1)
+						    	s=String.valueOf(d);
+						    	result=in.next();
+					            if(fra.judge_FRA(s,result)==1)
+					            {
+					            	sum++;
+					            }
+						    }
+						}
+						System.out.println("正确"+sum+"道题");
+					}
+					else if(str2.equals("N"))//不需要产生余数
+					{
+						for(i=0;i<N;i++)
+						{
+							int a,b,c,c1,h;
+							a=(int) (Math.random()*N2);
+						    b=(int) (Math.random()*N2);
+						    h=(int) (Math.random()*4);
+						    //控制加减运算符
+							c=(int) (Math.random()*(N2-1)+1);
+						    c1=(int) (Math.random()*10+1);
+						    //控制倍数	    
+						    if(h==0)
+						    {
+						    	System.out.println(a+"+"+b+"=");
+						    	double s;
+					    		s=a+b;
+					    		strr2=in.nextDouble();
+					            if(fra.judge(s,strr2)==1)
+					            {
+					            	sum++;
+					            }
+						    }
+						    if(h==1)
+						    {
+						    	System.out.println(a+"-"+b+"=");
+						    	double s;
+					    		s=a-b;
+					    		strr2=in.nextDouble();
+					            if(fra.judge(s,strr2)==1)
+					            {
+					            	sum++;
+					            }
+						    }
+						    if(h==2)//乘法
+						    {
+						    	System.out.println(a+"*"+b+"=");
+						    	double s;
+					    		s=a*b;
+					    		strr2=in.nextDouble();
+					            if(fra.judge(s,strr2)==1)
+					            {
+					            	sum++;
+					            }
+						    }
+						    if(h==3)//除法，不产生余数
+						    {
+						    	int d;	    	
+						    	//不能产生余数
+						    	d=c*c1;
+						    	System.out.println(d+"/"+c+"=");
+						    	double s;
+						    	s=d/c;
+					    		strr2=in.nextDouble();
+					            if(fra.judge(s,strr2)==1)
+					            {
+					            	sum++;
+					            }
+						    	
+						    }
+						}
+						System.out.println("正确"+sum+"道题");
+					}
+				}
+						
+				else if(str1.equals("N"))//没有乘除法
+				{
+					int a,b,h;						
+					for(i=0;i<N;i++)
+					{
+						a=(int) (Math.random()*N2);
+					    b=(int) (Math.random()*N2);
+						h=(int) (Math.random()*2);
+						//控制运算符
+						if(h==0)
+					    {
+					    	System.out.println(a+"+"+b+"=");
+					    	double s;
+				    		s=a+b;
+				    		strr2=in.nextDouble();
+				            if(fra.judge(s,strr2)==1)
+				            {
+				            	sum++;
+				            }
+					    }
+					    if(h==1)
+					    {
+					    	System.out.println(a+"-"+b+"=");
+					    	double s;
+				    		s=a-b;
+				    		strr2=in.nextDouble();
+				            if(fra.judge(s,strr2)==1)
+				            {
+				            	sum++;
+				            }
+					    }
+					}
+					System.out.println("正确"+sum+"道题");
+				}
+			}
+		}
+		in.close();
+	}
+}
+class change{
+	Scanner in=new Scanner(System.in);
+    int change_(int a,int b)//化简分数
+    {
+	  int r1;
+	  if(a>b)
+      {
+      	r1=b;
+      }
+      else
+      	r1=a;
+	  int k=0;
+	  for(int j=1;j<=r1;j++)
+  	  {
+  		if(a%j==0&&b%j==0)
+  		{
+  			k=j;
+  		 }  		
+  	  }
+	    return k;
+    }
+  int  judge_FRA(String str1,String str)//分数运算判断对错，计算正确次数
+  {
+	  int ju;
+      if(str.equals(str1))
+      {
+      	System.out.println("正确");
+      	ju=1;
+      }
+      else
+      {
+      	System.out.println("错误");
+      	ju=0;
+      }
+      return ju;
+  }
+  int judge(double s,double ss)//整数判断对错，计算正确次数
+  {
+	  int ju;
+      if(s==ss)
+      {
+      	System.out.println("正确");
+      	ju=1;
+      }
+      else
+      {
+      	System.out.println("错误");
+      	ju=0;
+      }
+      return ju;
+  }
+}
