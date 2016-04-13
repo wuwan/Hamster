@@ -1,4 +1,4 @@
-//首尾不连接
+//一维数组首尾不连接
 //求数组中子数组和的最大值
 import java.util.Scanner;
 public class Test2 {
