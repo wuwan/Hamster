@@ -1,0 +1,83 @@
+//一维数组首尾连接
+//求数组中子数组和的最大值
+import java.util.Scanner;
+public class Test3{
+  public static void main(String[] args){
+	  int N=3;
+	  int list[]=new int [N];
+	  //创建一个新数组
+	  Scanner in=new Scanner(System.in);
+	  int i;
+	  System.out.println("请输入数组：");
+	  for(i=0;i<N;i++)
+	  {
+		  list[i]=in.nextInt();
+	  }
+	  max_ l=new max_();
+	  System.out.print("子数组最大的和为:  "+l.max_(list,N));
+	  //调用函数
+	  in.close();
+  }
+}
+class max_
+{
+	int max_(int list[],int length)
+	{
+		int i;
+		int max;
+		int lmax1=0;
+		int lmax2=0;
+		int max1=list[0];
+	    //设最大值为list[0]
+		for(i=0;i<length;i++)
+		{
+			lmax1+=list[i];
+			if(lmax1>max1||lmax1==max1)
+			{
+				max1=lmax1;
+			}
+			if(lmax1<0)//若小于0，则从后一个数开始加和
+			{
+				lmax1=0;
+				if(max1<list[i]||max1==list[i])
+				{
+					max1=list[i];
+				}
+			}
+			//若数组全为负数，求最大值
+		}
+		//实现首尾相接，求最大值
+		int sum;
+		sum=list[length-1];
+		for(i=0;i<length-1;i++)
+		{
+			list[i+1]=list[i];
+		}
+		list[0]=sum;
+		int max2=list[0];
+		for(i=0;i<length;i++)
+		{
+			lmax2+=list[i];
+			if(lmax1>max2||lmax1==max2)
+			{
+				max2=lmax2;
+			}
+			if(lmax2<0)//若小于0，则从后一个数开始加和
+			{
+				lmax2=0;
+				if(max2<list[i]||max2==list[i])
+				{
+					max2=list[i];
+				}
+			}
+			//若数组全为负数，求最大值
+		}
+		if(max1>max2)
+		{
+			max=max1;
+		}
+		else
+			max=max2;
+		return max;
+	}
+}
