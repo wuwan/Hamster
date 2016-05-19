@@ -1,0 +1,35 @@
+//找出论坛上的水王
+import java.util.Scanner;
+public class test4 {
+  public static void main(String[] args){
+	 Scanner in=new Scanner(System.in);
+	 int N;
+	 System.out.println("请输入帖子的总数：");
+	 N=in.nextInt();
+	 String list[]=new String [N];
+	 int i,j=0;
+	 System.out.println("请输入ID：");
+	 for(i=0;i<N;i++)
+	 {
+		 list[i]=in.next();
+	 }
+	 String king=list[0];
+	 //设水王是第一个ID
+	 for(i=0;i<N-1;i++)
+	 {
+		 //增加相同的，消除不同的，最后剩下的是水王
+	     if(king.equals(list[i+1]))
+		 {
+			j++;
+		 }
+		 else
+		    j--;
+	     if(j<0)
+	     {
+	    	 king=list[i+1];
+	     }
+	 }
+	 System.out.println("水王是："+king);
+	 in.close();
+  }
+}
