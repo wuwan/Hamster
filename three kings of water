@@ -1,0 +1,59 @@
+//求三个小水王
+import java.util.Scanner;
+public class test5 {
+  public static void main(String[] args){
+     Scanner in=new Scanner(System.in);
+     int N;
+   	 System.out.println("请输入帖子的总数：");
+   	 N=in.nextInt();
+   	 int list[]=new int [N];
+   	 int i;
+   	 System.out.println("请输入ID：");
+   	 for(i=0;i<N;i++)
+	 {
+		 list[i]=in.nextInt();
+	 }
+   	 int nID[]=new int [3];
+   	 nID[0]=nID[1]=nID[2]=0;
+   	 int ID[]=new int [3];
+   	 ID[0]=ID[1]=ID[2]=-1;
+   	 for(i=0;i<N;i++)
+   	 {
+   		 if(nID[0]==0)
+  		 {
+  			 nID[0]++;
+  			 ID[0]=list[i];
+  		 }
+  		 else if(nID[1]==0)
+ 		 {
+ 			 nID[1]++;
+ 			 ID[1]=list[i];
+ 		 }
+  		 else if(nID[2]==0)
+ 		 {
+ 			 nID[2]++;
+ 			 ID[2]=list[i];
+ 		 }
+  		 else if(list[i]==ID[0])
+   		 {
+   			 nID[0]++;
+   		 }
+   		 else if(list[i]==ID[1])
+   		 {
+   			 nID[1]++;
+   		 }
+   		 else if(list[i]==ID[2])
+   		 {
+   			 nID[2]++;
+   		 }
+   		 else
+   		 {
+   			 nID[0]--;
+   			 nID[1]--;
+   			 nID[2]--;
+   		 }
+   	 }
+   	 System.out.println("三个小水王分别是："+ID[0]+" "+ID[1]+" "+ID[2]);
+   	 in.close();
+  }
+}
